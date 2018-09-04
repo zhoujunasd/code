@@ -1,0 +1,75 @@
+/* pages/book/book.wxss */
+
+/**基础风格样式**/
+@import '/towxml/style/main.wxss';
+
+/**如果页面有动态主题切换，则需要将使用到的样式全部引入**/
+
+/**主题配色（浅色样式）**/
+@import '/towxml/style/theme/light.wxss';
+
+/**主题配色（深色样式）**/
+@import '/towxml/style/theme/dark.wxss';
+
+/* 引入图标的样式 */
+@import '/static/iconfont/iconfont.wxss';
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  height: 100rpx;
+  line-height: 100rpx;
+  border-top: 1px solid #aaa;
+  background-color: #fff;
+}
+
+.menu .iconfont {
+  flex: 1;
+  text-align: center;
+  font-size: 60rpx;
+}
+
+.menu .iconfont:active {
+  background-color: #ccc;
+}
+
+.bookDetail {
+  margin-bottom: 100rpx;
+  height: 100%
+}
+
+.catalog-menu {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  padding-bottom: 100rpx;
+  background: #f1f1f1;
+  border: 1px solid #bbb;
+  z-index: 996;
+  width: 600rpx;
+}
+
+.catalog-menu .catalog-item {
+  font-size: 16px;
+  color: #666;
+  line-height: 60rpx;
+  height: 60rpx;
+  padding-left: 20rpx;
+  border-bottom: 1px solid #333;
+}
+
+.mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 888;
+  background: rgba(0, 0, 0, .2)
+}

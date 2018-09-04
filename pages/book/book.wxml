@@ -1,0 +1,24 @@
+<import src="/towxml/entry.wxml" />
+<view class='book'>
+  <!-- <scroll-view scroll-top="{{scrollTop}}" bindscroll="scroll" scroll-y="true" scroll-into-view="{{toView}}" class='bookDetail'>
+  </scroll-view> -->
+  <!-- <cover-view overflow-y:scroll scroll-top="{{scrollTop}}" class='bookDetail'>
+    <template is="entry" data="{{...article}}" />
+  </cover-view> -->
+
+  <template is="entry" data="{{...article}}" />
+
+  <view class='mask' bindtap='toggleCatalog' wx:if="{{isShow}}"></view>
+  <scroll-view bindscroll="scroll" wx:if="{{isShow}}" class="catalog-menu" scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
+    <!-- bindscroll="scroll" -->
+    <view class="catalog-item" wx:for="{{catalog}}" wx:key="{{index}}" bindtap="handleGet" data-id="{{item._id}}">{{item.title}}</view>
+  </scroll-view>
+  <view class='menu'>
+    <view class='iconfont icon-shangyiye'></view>
+    <view class='iconfont icon-mulu' bindtap='toggleCatalog'></view>
+    <view class='iconfont icon-yueduye_zitizengda'></view>
+    <view class='iconfont icon-yueduye_zitijianxiao'></view>
+    <view class='iconfont icon-xiayiye'></view>
+  </view>
+
+</view>

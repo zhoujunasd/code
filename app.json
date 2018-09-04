@@ -1,10 +1,14 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/details/details",
+    "pages/catalog/catalog",
+    "pages/book/book"
+
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#cdcdcd",
+    "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "破万卷",
     "navigationBarTextStyle": "black"
   }

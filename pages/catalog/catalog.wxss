@@ -1,0 +1,12 @@
+/* pages/catalog/catalog.wxss */
+.other-navigator-hover{
+  background-color: #ccc
+}
+.catalog{
+  font-size: 16px;
+  color: #333
+}
+.catalog .link {
+  line-height: 2;
+  border-bottom: 2rpx solid #333;
+}
