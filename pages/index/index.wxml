@@ -1,0 +1,36 @@
+<view class='container'>
+  <swiper class="index" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+    <block wx:for="{{sowingMap}}" wx:key="{{index}}">
+      <swiper-item>
+        <image src="{{item.img}}" class="slide-image" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <view class='main-content' wx:for="{{allContent}}" wx:for-item="content_item" wx:key="{{index}}">
+    <view class='content-item'>
+      <view class='content-top'>
+        <view class='title'>{{content_item.title}}</view>
+        <image class='icon' src='{{content_item.icon}}'></image>
+      </view>
+      <view class='content' wx:for="{{content_item.books}}" wx:for-item="item" wx:key="{{index}}">
+        <view class='box-l'>
+          <image class='img' src='{{item.img}}'></image>
+        </view>
+        <view class='box-r'>
+          <view>
+            <view class='book-title'>{{item.title}}</view>
+            <view class='book-desc'>{{item.desc}}</view>
+          </view>
+          <view class='author'>
+            <text class='author-l'>{{item.author}}</text>
+            <view class='author-r'>
+              <text class='update-time'>{{item.updateTime}}</text>
+              <!-- <text class='category'>{{content_item.title}}</text> -->
+              <text class='many'>{{item.looknums}}人在看</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

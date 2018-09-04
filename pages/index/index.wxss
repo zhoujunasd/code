@@ -1,0 +1,74 @@
+.index .slide-image {
+  width: 710rpx;
+  height: 350rpx;
+}
+
+.content-item {
+  margin-top: 40rpx;
+}
+
+.content-item .content-top {
+  display: flex;
+}
+
+.content-item .title {
+  font-size: 16px;
+  padding: 0 20rpx;
+  border-left: 2px solid #333;
+  line-height: 24px;
+  height: 24px;
+}
+
+.content-item .icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: text-bottom;
+}
+
+.content-item .content {
+  margin-top: 30rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content .box-l .img {
+  width: 210rpx;
+  height: 300rpx;
+}
+
+.box-r {
+  margin-left: 30rpx;
+  padding-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.box-r .book-title {
+  font-size: 16px;
+  color: #333;
+}
+
+.box-r .book-desc {
+  font-size: 14px;
+  color: #ccc;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  line-height: 1.5
+}
+
+.box-r .author {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px
+}
+
+.author .author-r text{
+  margin: 0 8rpx
+}
+
+.update-time{
+  color: red
+}
