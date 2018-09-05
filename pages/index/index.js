@@ -1,7 +1,8 @@
 // pages/index/index.js
 const app = getApp()
 import {
-  fatch,transformtime
+  fatch,
+  transformtime
 } from "../../utils/fatch.js"
 
 Page({
@@ -14,15 +15,12 @@ Page({
     autoplay: true,
     interval: 3000,
     duration: 500,
-    date:""
+    update: ""
   },
   /* 生命周期函数--监听页面加载*/
   onLoad(options) {
     this.getDate();
     this.getContent();
-    // transformtime(){
-
-    // }
   },
   getDate() {
     // this.setData({
@@ -48,12 +46,13 @@ Page({
       this.setData({
         allContent: res.data.data
       })
-      console.log(this.data.allContent) //首页图书列表数据
+      // console.log(this.data.allContent) //首页图书列表数据
+      this.upDate()
     })
   },
   jumpBook(event) {
     const id = event.currentTarget.id
-    console.log(event)
+    // console.log(event)
     wx.navigateTo({
       url: `/pages/details/details?id=${id}`,
       success(res) {},
@@ -63,6 +62,39 @@ Page({
       complete(res) {}, //接口调用结束的回调函数，无论成功与否都调用
     })
   },
+  upDate() {
+    let data = this.data.allContent;
+    data.forEach(item => {
+      let bookdata = item.books
+      return bookdata.forEach(item => {
+        let trans_time = transformtime(item.updateTime)
+        return item.updateTime = trans_time
+        // console.log(item)
+        // console.log(item.updateTime)
+        // console.log(trans_time)
+      })
+      // console.log(item)
+      // console.log(bookdata)
+    })
+    // console.log(data) //修改后的时间
+    this.setData({
+      allContent: data
+    })
+
+    // ?
+    // let trantime =  this.data.allContent.forEach(item => {
+    //   // console.log(item)
+    //   return item.books.forEach(item => {
+    //     // console.log(item)
+    //     return item.updateTime = transformtime(item.updateTime)
+    //     // console.log(item.updateTime)
+    //   })
+    // })
+    // this.setData({
+    //   allContent: trantime
+    // })
+  },
+
   /* 生命周期函数--监听页面初次渲染完成 */
   onReady: function() {
 

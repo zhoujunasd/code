@@ -1,31 +1,36 @@
 <view class='container datails'>
-  <view class='book-datails'>
-    <view class='book-t'>
-      <image class='img' src='{{bookDetails.data.img}}'></image>
-      <view class='main-msg'>
-        <view class='title'>{{bookDetails.data.title}}</view>
-        <view class='author-name'>作者：{{bookDetails.data.author}}</view>
-        <view class='look-numbers'>{{bookDetails.data.looknums}}人在看</view>
-        <view class='like-numbers'>{{bookDetails.data.startsnums}}人喜欢</view>
+  <image src='/static/images/img-01.svg' class='loading' wx:if="{{isLoding}}"></image>
+  <view wx:else>
+    <view class='book-datails'>
+      <view class='book-t'>
+        <image class='img' src='{{bookDetails.data.img}}'></image>
+        <view class='main-msg'>
+          <view class='title'>{{bookDetails.data.title}}</view>
+          <view class='author-name'>作者：{{bookDetails.data.author}}</view>
+          <view class='look-numbers'>{{bookDetails.data.looknums}}人在看</view>
+          <view class='like-numbers'>{{bookDetails.data.startsnums}}人喜欢</view>
+        </view>
+      </view>
+      <view class='book-b'>
+        <button class='btn'>收藏</button>
+        <button class='btn'>分享</button>
       </view>
     </view>
-    <view class='book-b'>
-      <button class='btn'>收藏</button>
-      <button class='btn'>分享</button>
+    <view class='book-desc'>
+      <view class='top'>简介</view>
+      <view class='desc-main'> {{bookDetails.data.desc}}</view>
+    </view>
+    <view class='book-catalog'>
+      <view class='catalog-l'>
+        <view class='show-catalog' bindtap='jumpCatalog' id="{{bookDetails.data._id}}">查看目录</view>
+        <view class='catalog'>共{{bookDetails.length}}章</view>
+      </view>
+      <view class='update-time'>最后更新于{{bookDetails.data.updateTime}}</view>
+    </view>
+    <view class='read-btn-wrap'>
+      <button wx:if="{{isreading}}" class='bottom-btn' bindtap='readBook' id="{{bookDetails.data._id}}">继续阅读</button>
+      <button wx:else class='bottom-btn' bindtap='readBook' id="{{bookDetails.data._id}}">阅读本书</button>
     </view>
   </view>
-  <view class='book-desc'>
-    <view class='top'>简介</view>
-    <view class='desc-main'>  {{bookDetails.data.desc}}</view>
-  </view>
-  <view class='book-catalog'>
-    <view class='catalog-l'>
-      <view class='show-catalog'>查看目录</view>
-      <view class='catalog'>共{{bookDetails.length}}章</view>
-    </view>
-    <view class='update-time'>更新于{{bookDetails.data.updateTime}}</view>
-  </view>
-  <view class='read-btn-wrap'>
-    <button class='bottom-btn' bindtap='jumpCatalog' id="{{bookDetails.data._id}}">阅读本书</button>
-  </view>
+
 </view>

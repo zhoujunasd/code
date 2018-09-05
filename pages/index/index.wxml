@@ -26,7 +26,7 @@
             <view class='author'>
               <text class='author-l'>{{item.author}}</text>
               <view class='author-r'>
-                <text class='update-time'>{{item.updateTime}}</text>
+                <text class='update-time'>最后更新：{{item.updateTime}}</text>
                 <!-- <text class='category'>{{content_item.title}}</text> -->
                 <text class='many'>{{item.looknums}}人在看</text>
               </view>

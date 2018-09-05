@@ -1,6 +1,9 @@
 <view class='container catalog'>
-  <view wx:for="{{catalog}}" wx:key="{{index}}" class='catalog-item'>
-    <!-- <navigator url="{{'/pages/book/book?cata_id=' + item._id}}" hover-class="other-navigator-hover" class='link'>{{item.title}}</navigator> 数据未转换前有bookid，转换成markdowm格式后数据缺失-->
-    <navigator url="{{'/pages/book/book?cata_id=' + item._id + '&bookId=' + bookID}}" hover-class="other-navigator-hover" class='link'>{{item.title}}</navigator>
+  <image src='/static/images/img-01.svg' class='loading' wx:if="{{isLoding}}"></image>
+  <view wx:else>
+    <view wx:for="{{catalog}}" wx:key="{{index}}" class='catalog-item'>
+      <!-- <navigator url="{{'/pages/book/book?cata_id=' + item._id}}" hover-class="other-navigator-hover" class='link'>{{item.title}}</navigator> 数据未转换前有bookid，转换成markdowm格式后数据缺失-->
+      <navigator url="{{'/pages/book/book?cata_id=' + item._id + '&bookId=' + bookID}}" hover-class="other-navigator-hover" class='link'>{{item.title}}</navigator>
+    </view>
   </view>
 </view>

@@ -12,6 +12,7 @@ Page({
   data: {
     bookID: "",
     catalog: [],
+    isLoding:false,
   },
 
   /**
@@ -25,11 +26,15 @@ Page({
     this.getData()
   },
   getData() {
+    this.setData({
+      isLoding:true
+    })
     // console.log(this.data.bookID)
     fatch.get(`/titles/${this.data.bookID}`).then(res => {
       // console.log(res) //获取的图书列表接口数据
       this.setData({
-        catalog: res.data.data
+        catalog: res.data.data,
+        isLoding: false
       })
       // console.log(this.data.catalog) //图书列表数据
     })

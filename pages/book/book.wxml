@@ -1,24 +1,30 @@
-<import src="/towxml/entry.wxml" />
+<!-- <import src="/towxml/entry.wxml" /> -->
 <view class='book'>
-  <!-- <scroll-view scroll-top="{{scrollTop}}" bindscroll="scroll" scroll-y="true" scroll-into-view="{{toView}}" class='bookDetail'>
-  </scroll-view> -->
-  <!-- <cover-view overflow-y:scroll scroll-top="{{scrollTop}}" class='bookDetail'>
-    <template is="entry" data="{{...article}}" />
-  </cover-view> -->
+  <!-- <template is="entry" data="{{...article}}" /> -->
+  <!-- 页面数据 -->
+  <scroll-view style="{{'font-size:' + font + 'rpx'}}" class='wemark-wrap' scroll-y="true" scroll-top="{{scrollTop}}" catchtouchstart="{{isMenu ? 'hiddenMenu':''}}">
+    <wemark md="{{article.content}}" highlight type="rich-text" bindtap="click"></wemark>
+  </scroll-view>
 
-  <template is="entry" data="{{...article}}" />
-
+  <!-- 左侧目录导航 -->
   <view class='mask' bindtap='toggleCatalog' wx:if="{{isShow}}"></view>
-  <scroll-view bindscroll="scroll" wx:if="{{isShow}}" class="catalog-menu" scroll-y bindscrolltoupper="upper" bindscrolltolower="lower" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}">
-    <!-- bindscroll="scroll" -->
+  <scroll-view class="catalog-menu {{isShow ? 'active': ''}}" scroll-y scroll-top="{{scrollTop}}">
+    <!-- wx:if="{{isShow}}" bindscroll="scroll" bindscrolltoupper="upper" bindscrolltolower="lower" scroll-into-view="{{toView}}"-->
     <view class="catalog-item" wx:for="{{catalog}}" wx:key="{{index}}" bindtap="handleGet" data-id="{{item._id}}">{{item.title}}</view>
   </scroll-view>
-  <view class='menu'>
-    <view class='iconfont icon-shangyiye'></view>
+  <!-- 顶部数据 -->
+  <view class='menu-top' wx:if="{{isMenu}}">
+    <view class='iconfont-top catalog-title'>{{catalot_title}}</view>
+    <view class='iconfont icon-r icon-gengduo'></view>
+  </view>
+
+  <!-- 底部菜单 -->
+  <view class='menu' wx:if="{{isMenu}}">
+    <view class='iconfont icon-shangyiye' bindtap='catalogSub'></view>
     <view class='iconfont icon-mulu' bindtap='toggleCatalog'></view>
-    <view class='iconfont icon-yueduye_zitizengda'></view>
-    <view class='iconfont icon-yueduye_zitijianxiao'></view>
-    <view class='iconfont icon-xiayiye'></view>
+    <view class='iconfont icon-yueduye_zitizengda' bindtap='fontSizeAdd'></view>
+    <view class='iconfont icon-yueduye_zitijianxiao' bindtap='fontSizeSub'></view>
+    <view class='iconfont icon-xiayiye' bindtap='catalogAdd'></view>
   </view>
 
 </view>

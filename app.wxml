@@ -1,1 +1,0 @@
-<image src='/static/images/img-01.svg' class='loading' wx:if="{{isLoding}}"></image>
