@@ -1,0 +1,26 @@
+<view class='person'>
+  <view class='loading' wx:if="{{!hasUserInfo}}">
+    <image class='loading-img' src='/static/images/loading.png'></image>
+    <button class='get-info' open-type="getUserInfo" bindgetuserinfo="getUserInfo">登陆</button>
+  </view>
+
+  <view wx:else>
+    <view class='userinfo-top'>
+      <image class='user-image' src="{{userInfo.avatarUrl}}"></image>
+      <view class='user-text'>
+        <text class='user-name'>{{userInfo.nickName}}</text>
+        <view class='user-person'>
+          <text class='persong-des'>个性签名：</text>
+          <text class='persong-des-info'>未写</text>
+        </view>
+      </view>
+
+    </view>
+    <view class='function'>
+      <view class='fun-first' bindtap=''>
+        <image src='/static/images/my_collect.png' class='icon'></image>
+        <text class='my-collect'>我的收藏</text>
+      </view>
+    </view>
+  </view>
+</view>

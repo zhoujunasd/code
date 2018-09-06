@@ -1,0 +1,88 @@
+/* pages/person/person.wxss */
+
+.container {
+}
+
+.person .loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 998;
+  width: 250rpx;
+  height: 250rpx;
+}
+
+.person .loading-img {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  z-index: 998;
+  left: 25%;
+  top:5%;
+}
+
+.person .get-info {
+  line-height: 320rpx;
+  height: 250rpx;
+  border-radius: 50%;
+  position: relative;
+  text-align: center;
+}
+
+.userinfo-top {
+  background-color: skyblue;
+  display: flex;
+  padding: 40rpx;
+  justify-content: flex-start;
+  height: 200rpx;
+}
+
+.userinfo-top .user-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.userinfo-top .user-name {
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.user-text {
+  display: flex;
+  flex-direction: column;
+  margin: 0 30rpx;
+  color: #fff;
+}
+
+.user-text .user-person {
+  font-size: 32rpx;
+  margin-top: 20rpx;
+}
+
+.function {
+  display: flex;
+  flex-direction: column;
+  margin: 20rpx;
+}
+
+.function .fun-first {
+  display: flex;
+  border-bottom: 0.5px solid #ccc;
+  border-radius: 5%;
+  padding-bottom: 10rpx;
+}
+
+.fun-first .icon {
+  width: 40px;
+  height: 40px;
+}
+
+.fun-first .my-collect {
+  margin: 0 20rpx;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+  width: 600rpx;
+}

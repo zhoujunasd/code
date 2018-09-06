@@ -5,7 +5,7 @@
 
 .book-t {
   display: flex;
-  justify-content:first baseline;
+  justify-content: first baseline;
   font-size: 12px;
   color: #333;
 }

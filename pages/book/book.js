@@ -85,7 +85,8 @@ Page({
     // })
     wx.setStorage({
       key: bookID,
-      data: catalog_ID,
+      // data: catalog_ID,
+      data:this.data.catalogId
     })
   },
   timeout_Func() {
@@ -194,7 +195,8 @@ Page({
   },
   toggleCatalog() {
     this.setData({
-      isShow: !this.data.isShow
+      isShow: !this.data.isShow,
+      isMenu: !this.data.isMenu
     })
   },
   handleGet(en) {
@@ -244,7 +246,12 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide() {},
+  onHide() {
+    // wx.setStorage({
+    //   key: bookID,
+    //   data: catalog_ID,
+    // })
+  },
 
   /**
    * 生命周期函数--监听页面卸载

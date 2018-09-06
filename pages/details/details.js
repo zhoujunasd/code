@@ -22,10 +22,26 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad(options) {
-    // console.log(options) //传递来的id数据
     this.setData({
-      bookId: options.id
+      bookId: options.id,
+      isLoding:true
     })
+    // 加载是否读过书籍
+    this.getReadBook().then(res => {
+      // console.log(res)
+      if (res.errMsg == "getStorage:ok") {
+        this.setData({
+          catalog_id: res.data,
+          isreading: true
+        })
+      } else {
+        console.log("未阅读，无数据")
+        this.setData({
+          isreading: false
+        })
+      }
+    })
+    // console.log(options) //传递来的id数据
     this.getData()
   },
   getData() {
@@ -108,8 +124,8 @@ Page({
           resolve(res)
         },
         fail(err) {
-
-          reject(err)
+          console.log("还未阅读本书")
+          // reject(err)
         }
       })
     })
@@ -132,22 +148,7 @@ Page({
     //     catalog_id: res.data
     //   })
     // })
-    this.getReadBook().then(res => {
-      // console.log(res)
-      if (res.errMsg == "getStorage:ok") {
-        this.setData({
-          catalog_id: res.data,
-          isreading: true
-        })
-      } else {
-        console.log("未阅读，无数据")
-      }
-    }).catch(err => {
-      // console.log(err)
-      this.setData({
-        isreading: false
-      })
-    })
+
   },
 
   /**
@@ -191,7 +192,11 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
-
+  onShareAppMessage() {
+    return {
+      title: this.data.bookDetails.data.title,
+      path: `/pages/details/details?id=${this.data.bookId}`,
+      imageUrl:this.data.bookDetails.data.img
+    }
   }
 })
