@@ -24,7 +24,7 @@ Page({
   onLoad(options) {
     this.setData({
       bookId: options.id,
-      isLoding:true
+      isLoding: true
     })
     // 加载是否读过书籍
     this.getReadBook().then(res => {
@@ -53,7 +53,7 @@ Page({
       this.setData({
         bookDetails: res.data,
       })
-      // console.log(this.data.bookDetails); //单本图书的详细数据
+      console.log(this.data.bookDetails); //单本图书的详细数据
       this.upDate()
     })
     // 将本书的目录,在页面卸载时存至本地缓存
@@ -130,6 +130,62 @@ Page({
       })
     })
   },
+  get_collect() {
+    fatch.post("/collection", {
+      bookId: this.data.bookId
+    }).then(res => {
+      console.log(res)
+      // this.getData()
+      if (res.data.code == 200) {
+        console.log("添加收藏成功")
+        this.data.bookDetails.isCollect = 1
+        this.setData({
+          bookDetails: this.data.bookDetails
+        })
+        wx.showToast({
+          title: '添加收藏成功',
+          icon: "success",
+        })
+      } else if (res.data.code == 401) {
+        // wx.showToast({
+        //   title: '登陆状态过期',
+        //   image: "/static/images/no_login.png",
+        // })
+        wx.showModal({
+          title: '登录状态',
+          content: '登陆状态过期，请重新登录',
+          confirmText: "去登录",
+          // showCancel: false,
+          success(res) {
+            console.log(res)
+            if (res.confirm === true) {
+              wx.switchTab({
+                url: "/pages/person/person",
+                success(res) {
+                  // console.log(res)
+                  // wx.showToast({
+                  //   title: '',
+                  //   image:"/static/images/img-01.svg",
+                  //   // mask:true,
+                  //   duration:500
+                  // })
+                  console.log("跳转至登录页面")
+
+                }
+              })
+            } else if (res.cancel == true) {
+              wx.showToast({
+                title: "收藏失败",
+                image: "/static/images/error.png"
+              })
+            }
+          }
+        })
+      }
+    }).catch(err => {
+      console.log("添加收藏失败")
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -196,7 +252,7 @@ Page({
     return {
       title: this.data.bookDetails.data.title,
       path: `/pages/details/details?id=${this.data.bookId}`,
-      imageUrl:this.data.bookDetails.data.img
+      imageUrl: this.data.bookDetails.data.img
     }
   }
 })

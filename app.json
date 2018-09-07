@@ -5,7 +5,8 @@
     "pages/catalog/catalog",
     "pages/book/book",
     "pages/more/more",
-    "pages/person/person"
+    "pages/person/person",
+    "pages/collect/collect"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,7 +26,7 @@
       },
       {
         "pagePath": "pages/more/more",
-        "text": "待开发",
+        "text": "阅读记录",
         "iconPath": "/static/images/gengduo.png",
         "selectedIconPath": "/static/images/gengduo_on.png"
       },

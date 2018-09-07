@@ -5,7 +5,6 @@ import {
   transformtime,
   login
 } from "../../utils/fatch.js"
-
 Page({
   /*页面的初始数据*/
   data: {
@@ -127,7 +126,7 @@ Page({
       allContent: [],
     })
     Promise.all([this.getDate(), this.getContent()]).then(() => {
-      // wx.stopPullDownRefresh(),
+      wx.stopPullDownRefresh(),
       wx.hideLoading()
       this.setData({
         isLoding: false,

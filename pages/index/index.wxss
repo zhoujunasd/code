@@ -69,8 +69,11 @@
   margin: 0 8rpx;
 }
 
+.author-r .many{
+  color: #333
+}
 .update-time {
-  color: red;
+  color: skyblue;
 }
 
 .loading-more {
@@ -93,7 +96,6 @@
 .no-more-data {
   padding: 0;
   position: relative;
-  
   background-color: #fbfbfb;
   display: flex;
   align-items: center;

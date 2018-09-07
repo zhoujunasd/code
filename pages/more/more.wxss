@@ -1,1 +1,141 @@
 /* pages/more/more.wxss */
+
+.content {
+  padding: 20rpx;
+}
+
+.readlist {
+  display: flex;
+  /* justify-content: space-between */
+  width: 700rpx;
+  /* height: 300rpx; */
+  margin-bottom: 20rpx;
+  border: 1rpx solid #ccc;
+  padding: 5px;
+  border-radius: 24rpx;
+}
+
+.readlist .read-img {
+  width: 230rpx;
+  height: 300rpx;
+}
+
+.read-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0 20rpx;
+}
+
+.read-right .book-title {
+  font-size: 32rpx;
+  /* font-weight: 700 */
+}
+
+.read-right .book-author {
+  font-size: 28rpx;
+  margin-top: 10rpx;
+  color: #0ecae9;
+}
+
+.read-right .book-section {
+  font-size: 24rpx;
+  margin-top: 5rpx;
+  color: #777;
+}
+
+.progress-bar {
+  margin-top: -5rpx;
+}
+
+.last-look {
+  display: flex;
+  margin-top: -5rpx;
+  /* flex-direction: column */
+  font-size: 24rpx;
+  justify-content: space-between;
+  color: #aaa;
+}
+
+.last-look .last-look-section {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  width: 360rpx;
+}
+
+.btn-bottom {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  width: 460rpx;
+}
+
+.btn-bottom .read-more, .read-details {
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  font-size: 30rpx;
+  margin-top: 5rpx;
+  color: #444;
+}
+
+.no-login {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 998;
+  width: 250rpx;
+  height: 250rpx;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  align-items:center;/*垂直居中;*/
+  justify-content: center;/*水平居中*/
+}
+
+.no-login image {
+  width: 150rpx;
+  height: 150rpx;
+}
+
+.no-login text {
+  text-align: center;
+  line-height: 50rpx;
+  height: 50rpx;
+  font-size: 28rpx;
+  color: skyblue
+}
+
+.no-more-data {
+  padding: 0;
+  margin: 0;
+  position: relative;
+  background-color: #fbfbfb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50rpx;
+  box-shadow:0 0 10rpx 20rpx #fbfbfb;
+}
+
+.no-more-data .no-more-text {
+  text-align: center;
+  font-size: 28rpx;
+  width: 200rpx;
+  background-color: #fbfbfb;
+  z-index: 998
+}
+
+.no-more-data .no-more-line {
+  position: absolute;
+  top: 50%;
+  /* left: 50%;
+  transform: translate(-50%, -50%); */
+  width: 600rpx;
+  height: 1rpx;
+  background-color: #bbb;
+}

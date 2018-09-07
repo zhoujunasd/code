@@ -1,2 +1,38 @@
-<!--pages/more/more.wxml-->
-<text>pages/more/more.wxml</text>
+<view class='content'>
+  <!-- item.book._id item.title.bookId 书籍ID-->
+  <!-- item.title._id 阅读记录的ID -->
+  <image src='/static/images/img-01.svg' class='loading' wx:if="{{isLoading}}"></image>
+  <view wx:else>
+    <view class='no-login' wx:if="{{!isLoging}}">
+      <image src='/static/images/no_login.png'></image>
+      <text>未登录</text>
+      <text>不记载数据</text>
+    </view>
+    <view wx:else>
+      <view class='readlist' wx:for="{{readList}}" wx:key="{{index}}">
+        <image class='read-img' src='{{item.book.img}}'></image>
+        <view class='read-right'>
+          <view class='book-title'>{{item.book.title}}</view>
+          <view class='book-author'>作者：{{item.book.author}}</view>
+          <view class='book-section'> 已看章节：{{item.title.index+1}}/{{item.title.total}}</view>
+          <view class='progress'>
+            <progress class='progress-bar' stroke-width="4" show-info color="skyblue" active percent="{{item.progress}}"></progress>
+            <!-- <view class='progress-text'>已看:{{item.progress}}%</view> -->
+          </view>
+          <view class='last-look'>
+            <view class='last-look-section'>上次阅读：{{item.title.title}}</view>
+            <view class='last-look-time'>{{item.updatedTime}}</view>
+          </view>
+          <view class='btn-bottom'>
+            <button class='read-more' bindtap="read_on" id="{{item.title._id}}" data-id="{{item.title.bookId}}">继续阅读</button>
+            <button class='read-details' bindtap='to_details' id="{{item.title.bookId}}">查看文档</button>
+          </view>
+        </view>
+      </view>
+      <view class='no-more-data'>
+        <text class='no-more-text'>没有数据了</text>
+        <text class='no-more-line'></text>
+      </view>
+    </view>
+  </view>
+</view>

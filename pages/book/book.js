@@ -35,13 +35,20 @@ Page({
       catalogId: options.cata_id
     })
     this.getData()
-    this.getCatalog().then((res, err) => {
-      if (err) throw err;
+    this.getCatalog().then( res => {
       // console.log(res) //成功时传递过来的数据
       this.setData({
         catalog: res.data
       })
       // console.log(this.data.catalog) //获取到列表的数据
+    }).catch(err=>{
+      // console.log("本地缓存没有目录数据")
+      fatch.get(`/titles/${this.data.bookId}`).then(res => {
+        this.setData({
+          catalog: res.data.data,
+        })
+        // console.log(this.data.catalog) //图书列表数据
+      })
     })
 
     // //自定义事件，格式为`eventRun_`+`绑定类型`+`_`+`事件类型`
@@ -175,6 +182,7 @@ Page({
           resolve(res)
         },
         fail(err) {
+          // console.log(err)
           reject(err)
         }
       })
