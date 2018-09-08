@@ -58,17 +58,17 @@ Page({
    * 生命周期函数--监听页面隐藏
    */
   onHide: function() {
-    wx.setStorage({
-      key: 'catalog',
-      data: this.data.catalog
-    })
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function() {
-
+    wx.setStorage({
+      key: this.data.bookID,
+      data: this.data.catalog
+    })
   },
 
   /**

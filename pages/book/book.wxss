@@ -35,6 +35,7 @@
   padding: 0 20rpx;
   width: 725rpx;
   height: 1180rpx;
+  margin-top: 10px;
 }
 
 .menu .iconfont {

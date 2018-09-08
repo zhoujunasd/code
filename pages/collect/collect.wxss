@@ -37,6 +37,7 @@
 .bottom {
   position: relative;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 120rpx;
@@ -44,6 +45,8 @@
 }
 
 .bottom .bottom-text {
+  position: absolute;
+  /* top: 50%; */
   text-align: center;
   font-size: 24rpx;
   width: 200rpx;
@@ -67,20 +70,32 @@
   right: 0;
 }
 
-.dis-none {
+.container .book-all .dis-none {
   display: none;
 }
 
-.book-all .del-btn {
-  /* background-color: #f00; */
-  background-color: #ccc;
-  width: 200rpx;
-  height: 60rpx;
-  line-height: 60rpx;
+.container .bottom .dis-none {
+  display: none;
+}
+
+.bottom .bootom-btn {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: -15rpx;
+  width: 520rpx;
+  height: 50rpx;
   text-align: center;
-  color: #fff;
 }
 
-.del-btn-on {
-  display: none;
+.bootom-btn .bottom-cancel {
+  line-height: 50rpx;
+  color: #fff;
+  background-color: #ccc;
+}
+
+.bootom-btn .bottom-del-btn {
+  line-height: 50rpx;
+  background-color: #ff0052;
+  color: #fff;
 }

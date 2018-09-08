@@ -5,16 +5,21 @@
   <view wx:else>
     <view class='book-all'>
       <view class='book-list' wx:for="{{collect_data}}" wx:key="{{index}}">
-        <view bindtap='go_detail' bind:longpress="longpress" data-id="{{item.book._id}}">
+        <view bindtap='{{is_Show ? "del_cilck":"go_detail"}}' bind:longpress="longpress" data-id="{{item.book._id}}">
           <image class='book-img' src='{{item.book.img}}'></image>
           <text class='book-title'>{{item.book.title}}</text>
           <!-- <view class='del-btn'></view> -->
         </view>
-        <icon class='del-btn {{is_del ? "":"dis-none"}}'  bindtap='del_cilck' data-id='{{del_color}}' color="{{del_color}}" type="success"></icon>
+        <!-- {{item.is_del ? "is-del":""}} -->
+        <icon class='del-btn {{is_Show ? "":"dis-none"}}' bindtap='del_cilck' data-id='{{item.book._id}}' color="{{item.is_del ? '#87ceeb':'#ccc'}}" type="success"></icon>
       </view>
-      <button class='del-btn'>删除</button>
+
     </view>
     <view class='bottom'>
+      <view class='bootom-btn {{is_Show ? "":"dis-none"}}'>
+        <button class='bottom-cancel' bindtap='cancel_btn'>取消</button>
+        <button class='bottom-del-btn' disabled='{{!is_able}}' bindtap='del_book_on'>删除</button>
+      </view>
       <text class='bottom-text'>收藏书籍：{{collect_data.length}}本</text>
       <view class='bottom-line'></view>
     </view>

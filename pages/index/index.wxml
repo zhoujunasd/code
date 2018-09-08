@@ -14,6 +14,7 @@
           <view class='content-top'>
             <view class='title'>{{content_item.title}}</view>
             <image class='icon' src='{{content_item.icon}}'></image>
+            <text class='more-book' bindtap='get_more_book' data-id="{{content_item._id}}">更多...</text>
           </view>
           <view bindtap="jumpBook" id="{{item._id}}" class='content' wx:for="{{content_item.books}}" wx:for-item="item" wx:key="{{index}}">
             <view class='box-l'>

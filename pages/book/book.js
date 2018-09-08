@@ -19,7 +19,7 @@ Page({
     catalog: [], //文章列表数据
     catalot_title: "",
     isShow: false, //章节列表是否显示
-    scrollTop: 0, //设置滚动条的高度
+    scrollTop: 5, //设置滚动条的高度
     isMenu: false, //菜单显示与否
     font: 42, //字体大小
     isData: true, //loading图标
@@ -35,13 +35,29 @@ Page({
       catalogId: options.cata_id
     })
     this.getData()
-    this.getCatalog().then( res => {
+   
+    // //自定义事件，格式为`eventRun_`+`绑定类型`+`_`+`事件类型`
+    // //例如`bind:touchstart`则为：
+    // this['eventRun_bind_touchmove'] = (event) => {
+    //   // console.log(event.target.dataset._el);     // 打印出元素信息
+    //   console.log('touchmove')
+    // };
+    this.getCatalog().then(res => {
       // console.log(res) //成功时传递过来的数据
-      this.setData({
-        catalog: res.data
-      })
+      // console.log(typeof(res.data))
+      if(typeof(res.data) == object){
+        this.setData({
+          catalog: res.data
+        })
+      }else{
+        fatch.get(`/titles/${this.data.bookId}`).then(res => {
+          this.setData({
+            catalog: res.data.data,
+          })
+        })
+      }
       // console.log(this.data.catalog) //获取到列表的数据
-    }).catch(err=>{
+    }).catch(err => {
       // console.log("本地缓存没有目录数据")
       fatch.get(`/titles/${this.data.bookId}`).then(res => {
         this.setData({
@@ -50,16 +66,12 @@ Page({
         // console.log(this.data.catalog) //图书列表数据
       })
     })
-
-    // //自定义事件，格式为`eventRun_`+`绑定类型`+`_`+`事件类型`
-    // //例如`bind:touchstart`则为：
-    // this['eventRun_bind_touchmove'] = (event) => {
-    //   // console.log(event.target.dataset._el);     // 打印出元素信息
-    //   console.log('touchmove')
-    // };
   },
   getData() {
     this.timeout_Func()
+    // this.setData({
+    //   scrollTop: 10,
+    // })
     fatch.get(`/article/${this.data.catalogId}`).then(res => {
       // let data = app.towxml.toJson(res.data.data.article.content, 'markdown');
       // //设置文档显示主题，默认'light'
@@ -69,12 +81,15 @@ Page({
       this.setData({
         isData: false,
         article: res.data.data.article,
-        scrollTop: 0,
+        scrollTop: 5,
         catalot_title: res.data.data.title,
         catalogId: res.data.data.article._id
       })
       wx.hideToast()
+     
+
       // console.log(this.data.article) //转换后的数据
+      // console.log(`${this.data.catalogId}数据加载时的方法`)
       // console.log(this.data.catalot_title) //章节题目
     }).catch(err => {
       wx.showToast({
@@ -93,7 +108,7 @@ Page({
     wx.setStorage({
       key: bookID,
       // data: catalog_ID,
-      data:this.data.catalogId
+      data: this.data.catalogId
     })
   },
   timeout_Func() {
@@ -146,6 +161,7 @@ Page({
       this.setData({
         catalogId: this.data.catalog[catalogid - 1]._id
       })
+      // console.log(`${this.data.catalogId}章节减一的方法`)
       this.getData()
     } else {
       // showToast有延迟，不可用于数据加载时的动画，即使没有延迟，也会在数据加载时出现
@@ -162,6 +178,7 @@ Page({
       this.setData({
         catalogId: this.data.catalog[catalogid + 1]._id
       })
+      // console.log(`${this.data.catalogId}章节加一的方法`)
       this.getData()
     } else {
       wx.showToast({
@@ -176,7 +193,7 @@ Page({
     // })
     return new Promise((resolve, reject) => {
       wx.getStorage({
-        key: "catalog",
+        key: this.data.bookId,
         success(res) {
           // console.log(res.data) //本地缓存的目录数据
           resolve(res)
@@ -214,7 +231,6 @@ Page({
     })
     this.getData()
     this.toggleCatalog()
-
   },
   click() {
     this.setData({
@@ -230,7 +246,12 @@ Page({
       isMenu: !this.data.isMenu
     })
   },
-
+  scrolltoupper() {
+    this.catalogSub()
+  },
+  scrolltolower() {//================={...data,...res.data.data.article},=============================
+    this.catalogAdd()
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -276,14 +297,12 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function() {
-
   },
 
   /**

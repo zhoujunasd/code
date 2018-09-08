@@ -6,7 +6,8 @@
     "pages/book/book",
     "pages/more/more",
     "pages/person/person",
-    "pages/collect/collect"
+    "pages/collect/collect",
+    "pages/type/type"
   ],
   "window": {
     "backgroundTextStyle": "light",

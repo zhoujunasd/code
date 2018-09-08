@@ -112,6 +112,20 @@ Page({
     //   allContent: trantime
     // })
   },
+  get_more_book(en){
+    // console.log(en)
+    let type_id = en.currentTarget.dataset.id
+    // console.log(type_id)
+    wx.navigateTo({
+      url: `/pages/type/type?typeId=${type_id}`,//=====================
+      success: function(res) {
+
+      },
+      fail: function(res) {
+        console.log("不知什么原因，跳转失败")
+      },
+    })
+  },
   /* 页面相关事件处理函数--监听用户下拉动作*/
   onPullDownRefresh() {
     // wx.showLoading({

@@ -10,8 +10,11 @@ Page({
   data: {
     collect_data: [], //存放收藏记录的书籍信息
     isLoading: false, //判断是否加载完数据
-    del_color:"#87ceeb",//长按点击后icon的颜色
-    is_del:false,
+    del_color: "#87ceeb", //长按点击后icon的颜色
+    // is_del:false,
+    is_Show: false, //删除功能是否显示
+    is_able: false, //删除键是否可用
+    num:0,//====================================================================
   },
 
   /**
@@ -19,7 +22,7 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      isLoading:true
+      isLoading: true
     })
     this.getData()
   },
@@ -29,8 +32,11 @@ Page({
     // })
     fatch.get("/collection").then(res => {
       // console.log(res)
+      res.data.data.forEach(item => {
+        item.is_del = false
+      })
       this.setData({
-        collect_data:res.data.data,
+        collect_data: res.data.data,
       })
       this.setData({
         isLoading: false
@@ -38,7 +44,7 @@ Page({
       // console.log(this.data.collect_data)
     })
   },
-  go_detail(en){
+  go_detail(en) {
     // console.log(en)
     let bookid = en.currentTarget.dataset.id
     wx.navigateTo({
@@ -47,42 +53,115 @@ Page({
       fail(res) {},
     })
   },
-  //==================================================
+  //===================
   // 每一个书籍信息需要一个数据dele_btn:true，记录是否点击了删除的icon
   // 每次点击都需要改变一次icon的color
   // 长按，改变数据的dele_btn值，并且显示所有的icon
   // 需要一个删除按钮，点击时删除，在长按后，显示出来
-  longpress(en){
+  longpress(en) {
     let book_id = en.currentTarget.dataset.id
-
+    // console.log(book_id)
+    this.data.collect_data.forEach(item => {
+      // console.log(item)
+      if (item.book._id == book_id) {
+        item.is_del = true
+      }
+    })
     this.setData({
-      is_del:true
+      collect_data: this.data.collect_data,
+      is_Show: true,
+      is_able: true,
+      num:1
+    })
+    // console.log(this.data.num)//=====================================================
+    // console.log(this.data.collect_data)
+
+    // this.setData({
+    //   is_del:true
+    // })
+  },
+  // 单个书籍的长按删除功能，不用
+  // longpress(en){
+  //   let book_id = en.currentTarget.dataset.id
+  //   console.log(en)
+  //   // console.log("删除书籍")
+  //   fatch.del(`/collection/${book_id}`).then(res=>{
+  //     this.getData()
+  //     console.log("书籍删除成功")
+  //   }).catch(err=>{
+  //     console.log("书籍删除失败")
+  //   }
+  //   )
+  // },
+  del_book_on() {
+    let book_will_del = []
+    this.data.collect_data.forEach(item => {
+      if (item.is_del == true) {
+        book_will_del.push(item.book._id)
+      }
+    })
+    // console.log(book_will_del)
+    fatch.post(`/collection/delete`, {
+      arr: book_will_del
+    }).then(res => {
+      this.getData()
+      this.setData({
+        is_able:false
+      })
+    }).catch(err => {
+      wx.showToast({
+        title: '删除失败',
+        image: "/static/images/error.png",
+        duration: 1000
+      })
     })
   },
-  longpress_asdasdasd(en){
-    let book_id = en.currentTarget.dataset.id
-    console.log(en)
-    // console.log("删除书籍")
-    fatch.del(`/collection/${book_id}`).then(res=>{
-      this.getData()
-      console.log("书籍删除成功")
-    }).catch(err=>{
-      console.log("书籍删除失败")
-    }
-    )
-  },
-
-  del_cilck(en){
+  del_cilck(en) {
     // console.log(en)
-    if (en.currentTarget.dataset.id == '#87ceeb'){
+    let book_id = en.currentTarget.dataset.id
+    this.data.collect_data.forEach(item => {
+      // console.log(item)
+      if (item.book._id == book_id) {
+        if (item.is_del == true) {
+          item.is_del = false
+          this.data.num -=1
+        } else if (item.is_del == false) {
+          item.is_del = true
+          this.data.num += 1
+        }
+      }
+    })
+    // console.log(this.data.num)
+    if (this.data.num>=1){
       this.setData({
-        del_color: "#ccc"
+        collect_data: this.data.collect_data,
+        is_able:true
       })
     }else{
       this.setData({
-        del_color: "#87ceeb"
+        collect_data: this.data.collect_data,
+        is_able:false
       })
     }
+
+    // if (en.currentTarget.dataset.id == '#87ceeb'){
+    //   this.setData({
+    //     del_color: "#ccc"
+    //   })
+    // }else{
+    //   this.setData({
+    //     del_color: "#87ceeb"
+    //   })
+    // }
+  },
+  cancel_btn() {
+    this.data.collect_data.forEach(item => {
+      item.is_del = false
+    })
+    this.setData({
+      collect_data: this.data.collect_data,
+      is_Show: false
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

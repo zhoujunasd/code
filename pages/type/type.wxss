@@ -1,0 +1,90 @@
+/* 头部title以及图标 */
+.type-top .title {
+  font-size: 32rpx;
+  padding-left:15rpx;
+  border-left: 1rpx solid #333;
+  line-height: 36rpx;
+  height: 36rpx;
+}
+
+.type-top .icon {
+  width: 44rpx;
+  height: 44rpx;
+  vertical-align: text-bottom;
+  margin-left:15rpx;
+}
+
+/* 中间数据渲染 */
+.content{
+  display: flex;
+  margin: 20rpx 10rpx;
+  /* flex-direction: column */
+}
+.content .box-l .img {
+  width: 210rpx;
+  height: 300rpx;
+}
+
+.box-r {
+  margin-left: 30rpx;
+  padding-bottom: 20rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.box-r .book-title {
+  font-size: 32rpx;
+  color: #333;
+}
+
+.box-r .book-desc {
+  font-size: 28rpx;
+  color: #ccc;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.box-r .author {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+}
+
+.author .author-r text {
+  margin: 0 8rpx;
+}
+
+/* 底部提示以及横线 */
+.bottom {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 120rpx;
+  margin-top: 20rpx;
+}
+
+.bottom .bottom-text {
+  position: absolute;
+  /* top: 50%; */
+  text-align: center;
+  font-size: 24rpx;
+  width: 200rpx;
+  z-index: 998;
+  background-color: #fff;
+}
+
+.bottom .bottom-line {
+  position: absolute;
+  top: 50%;
+  /* left: 50%;
+  transform: translate(-50%, -50%); */
+  width: 600rpx;
+  height: 1rpx;
+  background-color: #ccc;
+}

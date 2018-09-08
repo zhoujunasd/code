@@ -1,0 +1,28 @@
+<view class='container'>
+  <view class='type-top'>
+    <text class='title'>{{type_book.title}}</text>
+    <image class='icon' src='{{type_book.icon}}'></image>
+  </view>
+  <view bindtap="jumpBook" id="{{item._id}}" class='content' wx:for="{{type_book.books}}" wx:for-item="item" wx:key="{{index}}">
+    <view class='box-l'>
+      <image class='img' src='{{item.img}}'></image>
+    </view>
+    <view class='box-r'>
+      <view>
+        <view class='book-title'>{{item.title}}</view>
+        <view class='book-desc'>{{item.desc}}</view>
+      </view>
+      <view class='author'>
+        <text class='author-l'>{{item.author}}</text>
+        <view class='author-r'>
+          <text class='update-time'>最后更新：{{item.updateTime}}</text>
+          <text class='many'>{{item.looknums}}人在看</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='bottom'>
+    <text class='bottom-text'>已加载全部</text>
+    <view class='bottom-line'></view>
+  </view>
+</view>
