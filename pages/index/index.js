@@ -78,7 +78,7 @@ Page({
       failn(res) {
         throw res
       },
-      complete(res) {}, //接口调用结束的回调函数，无论成功与否都调用
+      // complete(res) {}, //接口调用结束的回调函数，无论成功与否都调用
     })
   },
   upDateTime(data) {

@@ -1,4 +1,8 @@
-<view class='container'>
+<view class='no-login' wx:if="{{!isLogin}}">
+  <image class='no-login-img' src='/static/images/not_login.png'></image>
+  <text class='no-login-title'>登没登录你不知道吗</text>
+</view>
+<view wx:else class='container'>
   <view wx:if="{{isLoading}}">
     <image src='/static/images/img-01.svg' class='loading' wx:if="{{isLoding}}"></image>
   </view>

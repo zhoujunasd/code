@@ -40,7 +40,7 @@ Page({
           type_book: res,
           isloading: false
         })
-        console.log(this.data.type_book)
+        // console.log(this.data.type_book)
       })
       // console.log(this.data.type_book)
     }).catch(err => {
@@ -62,6 +62,17 @@ Page({
       } catch (err) {
         reject(`${err}：修改时间时出错`)
       }
+    })
+  },
+  jumpBook(en) {
+    // console.log(en)
+    let bookid = en.currentTarget.id
+    wx.navigateTo({
+      url: `/pages/details/details?id=${bookid}`,
+      success(res) {},
+      failn(res) {
+        throw res
+      },
     })
   },
   /**

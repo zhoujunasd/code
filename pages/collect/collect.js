@@ -14,7 +14,8 @@ Page({
     // is_del:false,
     is_Show: false, //删除功能是否显示
     is_able: false, //删除键是否可用
-    num:0,//====================================================================
+    isLogin: false, //判断是否登录
+    num: 0, //====================================================================
   },
 
   /**
@@ -22,9 +23,32 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      isLoading: true
+      isLoading: true,
+      isLogin: false
     })
-    this.getData()
+    let that = this
+    wx.getUserInfo({
+      success(data) {
+        // console.log(data)
+          that.getData()
+      },
+      fail() {
+        // this.setData({
+        //     isLogin: false
+        // })
+        // wx.showToast({
+        //   title: '未登录',
+        //   image: "/static/images/error.png",
+        //   duration:1000
+        // })
+        that.setData({
+          isLoading: false,
+          isLogin: false,
+
+        })
+        // console.log(err)
+      }
+    })
   },
   getData() {
     // this.setData({
@@ -37,9 +61,8 @@ Page({
       })
       this.setData({
         collect_data: res.data.data,
-      })
-      this.setData({
-        isLoading: false
+        isLoading: false,
+        isLogin: true
       })
       // console.log(this.data.collect_data)
     })
@@ -71,7 +94,7 @@ Page({
       collect_data: this.data.collect_data,
       is_Show: true,
       is_able: true,
-      num:1
+      num: 1
     })
     // console.log(this.data.num)//=====================================================
     // console.log(this.data.collect_data)
@@ -106,7 +129,7 @@ Page({
     }).then(res => {
       this.getData()
       this.setData({
-        is_able:false
+        is_able: false
       })
     }).catch(err => {
       wx.showToast({
@@ -124,7 +147,7 @@ Page({
       if (item.book._id == book_id) {
         if (item.is_del == true) {
           item.is_del = false
-          this.data.num -=1
+          this.data.num -= 1
         } else if (item.is_del == false) {
           item.is_del = true
           this.data.num += 1
@@ -132,15 +155,15 @@ Page({
       }
     })
     // console.log(this.data.num)
-    if (this.data.num>=1){
+    if (this.data.num >= 1) {
       this.setData({
         collect_data: this.data.collect_data,
-        is_able:true
+        is_able: true
       })
-    }else{
+    } else {
       this.setData({
         collect_data: this.data.collect_data,
-        is_able:false
+        is_able: false
       })
     }
 

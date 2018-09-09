@@ -40,7 +40,7 @@
 
 .box-r .book-desc {
   font-size: 28rpx;
-  color: #ccc;
+  color: #aaa;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
@@ -52,6 +52,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 24rpx;
+  color: #49779f
 }
 
 .author .author-r text {

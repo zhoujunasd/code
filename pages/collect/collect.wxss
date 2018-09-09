@@ -99,3 +99,29 @@
   background-color: #ff0052;
   color: #fff;
 }
+
+/* 未登录时 */
+
+.no-login {
+  position: fixed;
+  top:36%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 998;
+  width: 250rpx;
+  height: 250rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.no-login .no-login-img {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.no-login .no-login-title {
+  font-size: 24rpx;
+  color: #0ecae9;
+}
