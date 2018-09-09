@@ -2,7 +2,6 @@
   <!-- <view class='loading' wx:if="{{!hasUserInfo}}">
     <image class='loading-img' src='/static/images/loading.png'></image>
   </view> -->
-
   <image src='/static/images/img-01.svg' class='loading' wx:if="{{isLoading}}"></image>
   <view wx:else>
     <view class='top'>
