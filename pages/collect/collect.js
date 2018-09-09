@@ -26,6 +26,19 @@ Page({
       isLoading: true,
       isLogin: false
     })
+    try {
+      let islogin = wx.getStorageSync("isLogin")
+      if (islogin == "") {
+        this.setData({
+          isLoading: false,
+          isLogin: false,
+        })
+      } else {
+        this.getData()
+      }
+    } catch (e) {
+      console.log(e)
+    }
     let that = this
     wx.getUserInfo({
       success(data) {
@@ -44,7 +57,6 @@ Page({
         that.setData({
           isLoading: false,
           isLogin: false,
-
         })
         // console.log(err)
       }
