@@ -19,10 +19,13 @@ Page({
     catalog: [], //文章列表数据
     catalot_title: "",
     isShow: false, //章节列表是否显示
-    scrollTop: 5, //设置滚动条的高度
+    // scrollTop: 5, //设置滚动条的高度
     isMenu: false, //菜单显示与否
     font: 42, //字体大小
     isData: true, //loading图标
+    // sub_catalogid:"",
+    // add_catalogid:""
+
   },
 
   /**
@@ -32,10 +35,10 @@ Page({
     // console.log(options) //从图书章节获取的数据，bookid以及catalogid
     this.setData({
       bookId: options.bookId,
-      catalogId: options.cata_id
+      catalogId: options.cata_id,
     })
     this.getData()
-   
+
     // //自定义事件，格式为`eventRun_`+`绑定类型`+`_`+`事件类型`
     // //例如`bind:touchstart`则为：
     // this['eventRun_bind_touchmove'] = (event) => {
@@ -45,11 +48,11 @@ Page({
     this.getCatalog().then(res => {
       // console.log(res) //成功时传递过来的数据
       // console.log(typeof(res.data))
-      if(typeof(res.data) == object){
+      if (typeof(res.data) == object) {
         this.setData({
           catalog: res.data
         })
-      }else{
+      } else {
         fatch.get(`/titles/${this.data.bookId}`).then(res => {
           this.setData({
             catalog: res.data.data,
@@ -72,21 +75,68 @@ Page({
     // this.setData({
     //   scrollTop: 10,
     // })
+    let detalis
+    if (typeof(this.data.article.content) == 'string') {
+      detalis = this.data.article
+      // console.log(detalis)
+      // console.log(typeof (this.data.article.content))
+      // console.log(this.data.article)
+    } else {
+      // console.log("空")
+      // console.log(typeof (this.data.article.content))
+    }
     fatch.get(`/article/${this.data.catalogId}`).then(res => {
       // let data = app.towxml.toJson(res.data.data.article.content, 'markdown');
       // //设置文档显示主题，默认'light'
       // // data.theme = 'dark';
+      // console.log(detalis)
+      if (typeof(detalis) != 'undefined') {
+        // (this.data.catalogId > detalis.titleId) ? console.log('true') : console.log('false')
+        if (this.data.catalogId > detalis.titleId) {
+          // 下一章
+          detalis.content += res.data.data.article.content
+          detalis.sub_catalogid = detalis.index
+          detalis.add_catalogid = res.data.data.article.index
+          this.setData({
+            article: detalis,
+          })
+          // console.log(detalis)
+        } else {
+          // 上一章
+          res.data.data.article.content += detalis.content
+          res.data.data.article.sub_catalogid = res.data.data.article.index
+          res.data.data.article.add_catalogid = detalis.index
+          this.setData({
+            article: res.data.data.article,
+          })
+        }
+
+        // console.log(this.data.catalogId)
+        // console.log(res)
+        // console.log(detalis)
+
+        // detalis.content+= res.data.data.article.content
+        // this.setData({
+        //   article: detalis,
+        // })
+      } else {
+        res.data.data.article.sub_catalogid = res.data.data.article.index
+        res.data.data.article.add_catalogid = res.data.data.article.index
+        this.setData({
+          article: res.data.data.article,
+        })
+      }
 
       // console.log(res) // 根据catalogid获取的文章的内容
       this.setData({
         isData: false,
-        article: res.data.data.article,
+        // article: res.data.data.article,
+        // article: detalis,
         scrollTop: 5,
         catalot_title: res.data.data.title,
         catalogId: res.data.data.article._id
       })
       wx.hideToast()
-     
 
       // console.log(this.data.article) //转换后的数据
       // console.log(`${this.data.catalogId}数据加载时的方法`)
@@ -153,7 +203,13 @@ Page({
   },
   catalogSub() {
     // console.log(this.data.article.index) // 本章节数据
-    let catalogid = this.data.article.index;
+    // let catalogid = this.data.article.index;
+    let catalogid = this.data.article.sub_catalogid;
+    // let catalogid = this.data.sub_catalogid
+    // this.setData({
+    //   sub_catalogid: catalogid
+    // })
+    // let catalogID = this.data.sub_catalogid
     // console.log(catalogid)
     if (catalogid) {
       // let a= this.data.catalog[catalogid+1]._id //章节目录中的数据id
@@ -173,13 +229,45 @@ Page({
     }
   },
   catalogAdd() {
-    let catalogid = this.data.article.index;
+    // let catalogid = this.data.article.index;
+    let catalogid = this.data.article.add_catalogid;
+    // let catalogid = this.data.add_catalogid
+    // this.setData({
+    //   add_catalogid: catalogid
+    // })
+    // let catalogID = this.data.add_catalogid
     if (this.data.catalog[catalogid + 1]) {
       this.setData({
         catalogId: this.data.catalog[catalogid + 1]._id
       })
       // console.log(`${this.data.catalogId}章节加一的方法`)
-      this.getData()
+      // this.getData()
+      this.timeout_Func()
+      fatch.get(`/article/${this.data.catalogId}`).then(res => {
+          res.data.data.article.sub_catalogid = res.data.data.article.index
+          res.data.data.article.add_catalogid = res.data.data.article.index
+          this.setData({
+            article: res.data.data.article,
+          })
+        this.setData({
+          isData: false,
+          scrollTop: 5,
+          catalot_title: res.data.data.title,
+          catalogId: res.data.data.article._id
+        })
+        wx.hideToast()
+      }).catch(err => {
+        wx.showToast({
+          title: '数据获取失败',
+          icon: "none"
+        })
+      })
+      const catalog_ID = this.data.catalogId
+      const bookID = this.data.bookId
+      wx.setStorage({
+        key: bookID,
+        data: this.data.catalogId
+      })
     } else {
       wx.showToast({
         title: '已经是最后一章',
@@ -249,7 +337,7 @@ Page({
   scrolltoupper() {
     this.catalogSub()
   },
-  scrolltolower() {//================={...data,...res.data.data.article},=============================
+  scrolltolower() { //================={...data,...res.data.data.article},=============================
     this.catalogAdd()
   },
   /**
@@ -296,14 +384,12 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
-  },
+  onPullDownRefresh: function() {},
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
-  },
+  onReachBottom: function() {},
 
   /**
    * 用户点击右上角分享
