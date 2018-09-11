@@ -5,7 +5,7 @@
   <!-- 上下拉数据的加载，需要在头部加一个滚动条加载时的动画，需要占据一定的空间，设置upper-threshold，当滚动条距离顶部多少时，触发刷新事件， lower-threshold当滚动条距离底部多少时，触发上拉事件，
   注意，需要在加载时将数据连接在一起，而不是将数据重新赋值，数据获取的结构已定，重新赋值麻烦，直接重新加载数据
   需要去掉scroll-top="{{scrollTop}}"属性，每次加载时滚动条至顶部，导致触发一次下拉事件   scroll-top="{{scrollTop}}"-->
-  <scroll-view style="{{'font-size:' + font + 'rpx'}}" class='wemark-wrap' scroll-y="true" upper-threshold="10" lower-threshold="10" bindscrolltolower="scrolltolower" bindscrolltoupper="scrolltoupper"  catchtouchstart="{{isMenu ? 'hiddenMenu':''}}">
+  <scroll-view style="{{'font-size:' + font + 'rpx'}}" class='wemark-wrap' scroll-y="true" scroll-top="{{scrollTop}}"upper-threshold="10" lower-threshold="10" bindscrolltolower="scrolltolower" bindscrolltoupper="scrolltoupper"  catchtouchstart="{{isMenu ? 'hiddenMenu':''}}">
     <wemark md="{{article.content}}" highlight type="rich-text" bindtap="click"></wemark>
   </scroll-view>
 

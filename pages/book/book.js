@@ -228,6 +228,20 @@ Page({
       })
     }
   },
+  catalogUpAdd(){
+    let catalogid = this.data.article.add_catalogid;
+    if (this.data.catalog[catalogid + 1]) {
+      this.setData({
+        catalogId: this.data.catalog[catalogid + 1]._id
+      })
+      this.getData()
+    }else{
+      wx.showToast({
+        title: '已经是最后一章',
+        icon: "success"
+      })
+    }
+  },
   catalogAdd() {
     // let catalogid = this.data.article.index;
     let catalogid = this.data.article.add_catalogid;
@@ -338,7 +352,7 @@ Page({
     this.catalogSub()
   },
   scrolltolower() { //================={...data,...res.data.data.article},=============================
-    this.catalogAdd()
+    this.catalogUpAdd()
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
